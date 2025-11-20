@@ -2,6 +2,32 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
+// Array of 20 NFT/Web3 Pexels images (stable links)
+const nftImages = [
+  "https://images.pexels.com/photos/1643336/pexels-photo-1643336.jpeg?auto=compress&cs=tinysrgb&w=500",
+  "https://images.pexels.com/photos/1149066/pexels-photo-1149066.jpeg?auto=compress&cs=tinysrgb&w=500",
+  "https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg?auto=compress&cs=tinysrgb&w=500",
+  "https://images.pexels.com/photos/844124/pexels-photo-844124.jpeg?auto=compress&cs=tinysrgb&w=500",
+  "https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=500",
+  "https://images.pexels.com/photos/1061581/pexels-photo-1061581.jpeg?auto=compress&cs=tinysrgb&w=500",
+  "https://images.pexels.com/photos/1648273/pexels-photo-1648273.jpeg?auto=compress&cs=tinysrgb&w=500",
+  "https://images.pexels.com/photos/38537/pexels-photo-38537.jpeg?auto=compress&cs=tinysrgb&w=500",
+  "https://images.pexels.com/photos/267614/pexels-photo-267614.jpeg?auto=compress&cs=tinysrgb&w=500",
+  "https://images.pexels.com/photos/167703/pexels-photo-167703.jpeg?auto=compress&cs=tinysrgb&w=500",
+  "https://images.pexels.com/photos/461198/pexels-photo-461198.jpeg?auto=compress&cs=tinysrgb&w=500",
+  "https://images.pexels.com/photos/210186/pexels-photo-210186.jpeg?auto=compress&cs=tinysrgb&w=500",
+  "https://images.pexels.com/photos/460675/pexels-photo-460675.jpeg?auto=compress&cs=tinysrgb&w=500",
+  "https://images.pexels.com/photos/163077/pexels-photo-163077.jpeg?auto=compress&cs=tinysrgb&w=500",
+  "https://images.pexels.com/photos/844128/pexels-photo-844128.jpeg?auto=compress&cs=tinysrgb&w=500",
+  "https://images.pexels.com/photos/373542/pexels-photo-373542.jpeg?auto=compress&cs=tinysrgb&w=500",
+  "https://images.pexels.com/photos/1643335/pexels-photo-1643335.jpeg?auto=compress&cs=tinysrgb&w=500",
+  "https://images.pexels.com/photos/1061582/pexels-photo-1061582.jpeg?auto=compress&cs=tinysrgb&w=500",
+  "https://images.pexels.com/photos/38330/pexels-photo-38330.jpeg?auto=compress&cs=tinysrgb&w=500",
+  "https://images.pexels.com/photos/267615/pexels-photo-267615.jpeg?auto=compress&cs=tinysrgb&w=500",
+];
+
+const randomNFTImage = nftImages[Math.floor(Math.random() * nftImages.length)];
+
 export default function Hero() {
   return (
     <section className="relative bg-gradient-to-tr from-gray-900 via-indigo-900 to-purple-900 text-white overflow-hidden">
@@ -87,7 +113,7 @@ export default function Hero() {
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
           >
             <img
-              src="https://picsum.photos/500/500?random=20"
+              src={randomNFTImage}
               alt="Featured NFT"
               className="w-full h-full object-cover"
             />

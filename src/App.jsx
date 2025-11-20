@@ -14,7 +14,7 @@ const App = () => {
     <BrowserRouter>
       <Header />
 
-      <div className="pt-[70px]">
+      <div className="pt-[60px]">
         <Routes>
           <Route
             path="/"
