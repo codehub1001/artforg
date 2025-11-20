@@ -15,7 +15,7 @@ export default function Hero() {
             Discover, Collect & Auction <br /> Amazing NFTs
           </h1>
           <p className="text-lg md:text-xl text-white/90 mb-8">
-            Join ArtonHive today to explore unique digital collectibles, bid on the latest drops, and showcase your NFTs to the world.
+            Join Artforg today to explore unique digital collectibles, bid on the latest drops, and showcase your NFTs to the world.
           </p>
 
           {/* CTA Buttons */}
