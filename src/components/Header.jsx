@@ -10,8 +10,8 @@ export default function Header() {
   const navLinks = [
     { name: "Home", path: "/", icon: <FaHome className="inline mr-2" /> },
     { name: "Explore", path: "/explore", icon: <FaSearch className="inline mr-2" /> },
-    { name: "Drops", path: "/drops", icon: <FaGift className="inline mr-2" /> },
-    { name: "Marketplace", path: "/marketplace", icon: <FaStore className="inline mr-2" /> },
+    // { name: "Drops", path: "/drops", icon: <FaGift className="inline mr-2" /> },
+    // { name: "Marketplace", path: "/marketplace", icon: <FaStore className="inline mr-2" /> },
     { name: "About Us", path: "/about", icon: <FaInfoCircle className="inline mr-2" /> },
   ];
 
@@ -120,7 +120,7 @@ export default function Header() {
                 <Link
                   to="/signin"
                   onClick={() => setMenuOpen(false)}
-                  className="w-full text-center px-6 py-2 border border-gray-600 rounded-full text-white font-medium"
+                  className=" w-full text-center px-6 py-2  border border-gray-600 rounded-full text-white font-medium"
                 >
                   Sign In
                 </Link>
