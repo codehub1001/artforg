@@ -49,7 +49,7 @@ export default function AdminDashboard() {
     [users, pendingDeposits, pendingWithdrawals, transactions, wallets]
   );
 
-  const BASE_URL = "http://localhost:8000";
+  const BASE_URL = "https://artforapi.onrender.com";
 
   const API = {
     users: `${BASE_URL}/api/admin/users`,

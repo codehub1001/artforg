@@ -56,14 +56,14 @@ export default function UserDashboard() {
       setLoading(true);
 
       const profileRes = await fetch(
-        `http://localhost:8000/api/users/${userId}/profile`,
+        `https://artforapi.onrender.com/api/users/${userId}/profile`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       const profileData = await profileRes.json();
       if (profileRes.ok) setProfile(profileData.user);
       else toast.error(profileData.error || "Failed to fetch profile");
 
-      const walletRes = await fetch("http://localhost:8000/api/wallet", {
+      const walletRes = await fetch("https://artforapi.onrender.com/api/wallet", {
         headers: { Authorization: `Bearer ${token}` },
       });
       const walletData = await walletRes.json();
@@ -107,7 +107,7 @@ export default function UserDashboard() {
   try {
     setTransactionLoading(true);
 
-    const res = await fetch("http://localhost:8000/api/wallet/deposit", {
+    const res = await fetch("https://artforapi.onrender.com/api/wallet/deposit", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -147,7 +147,7 @@ export default function UserDashboard() {
     try {
       setTransactionLoading(true);
 
-      const res = await fetch("http://localhost:8000/api/wallet/withdraw", {
+      const res = await fetch("https://artforapi.onrender.com/api/wallet/withdraw", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
