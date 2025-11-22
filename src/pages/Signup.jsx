@@ -1,9 +1,62 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  // FORM STATES
+  const [form, setForm] = useState({
+    firstName: "",
+    lastName: "",
+    username: "",
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+ const handleSignup = async () => {
+  const { firstName, lastName, username, email, password } = form;
+
+  if (!firstName || !lastName || !username || !email || !password) {
+    toast.error("All fields are required");
+    return;
+  }
+
+  try {
+    setLoading(true);
+
+    const res = await fetch("http://localhost:8000/api/auth/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ firstName, lastName, username, email, password }),
+    });
+
+    const data = await res.json();
+    setLoading(false);
+
+    if (!res.ok) {
+      toast.error(data.error || "Something went wrong");
+      return;
+    }
+
+    toast.success("Account created successfully!");
+
+    // redirect after 1 second
+    setTimeout(() => navigate("/signin"), 1000);
+  } catch (err) {
+    setLoading(false);
+    toast.error("Network error");
+  }
+};
+
 
   return (
     <section className="min-h-screen w-full bg-black flex items-center justify-center px-6 py-20 relative overflow-hidden">
@@ -50,6 +103,7 @@ export default function SignUp() {
 
         {/* FORM */}
         <div className="space-y-6">
+
           {/* First Name */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -59,6 +113,8 @@ export default function SignUp() {
             <label className="text-gray-300 text-sm">First Name</label>
             <input
               type="text"
+              name="firstName"
+              onChange={handleChange}
               className="w-full mt-1 p-3 rounded-xl bg-black/60 border border-purple-700/40 
               focus:border-purple-500 focus:outline-none text-white"
               placeholder="Enter first name"
@@ -74,6 +130,8 @@ export default function SignUp() {
             <label className="text-gray-300 text-sm">Last Name</label>
             <input
               type="text"
+              name="lastName"
+              onChange={handleChange}
               className="w-full mt-1 p-3 rounded-xl bg-black/60 border border-purple-700/40 
               focus:border-purple-500 focus:outline-none text-white"
               placeholder="Enter last name"
@@ -89,6 +147,8 @@ export default function SignUp() {
             <label className="text-gray-300 text-sm">Username</label>
             <input
               type="text"
+              name="username"
+              onChange={handleChange}
               className="w-full mt-1 p-3 rounded-xl bg-black/60 border border-purple-700/40 
               focus:border-purple-500 focus:outline-none text-white"
               placeholder="Choose a username"
@@ -104,13 +164,15 @@ export default function SignUp() {
             <label className="text-gray-300 text-sm">Email</label>
             <input
               type="email"
+              name="email"
+              onChange={handleChange}
               className="w-full mt-1 p-3 rounded-xl bg-black/60 border border-purple-700/40 
               focus:border-purple-500 focus:outline-none text-white"
               placeholder="Enter your email"
             />
           </motion.div>
 
-          {/* Password with toggle */}
+          {/* Password */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -120,6 +182,8 @@ export default function SignUp() {
             <label className="text-gray-300 text-sm">Password</label>
             <input
               type={showPassword ? "text" : "password"}
+              name="password"
+              onChange={handleChange}
               className="w-full mt-1 p-3 pr-12 rounded-xl bg-black/60 border border-purple-700/40 
               focus:border-purple-500 focus:outline-none text-white"
               placeholder="Enter a password"
@@ -135,20 +199,27 @@ export default function SignUp() {
 
           {/* Signup button */}
           <motion.button
+            onClick={handleSignup}
+            disabled={loading}
             whileHover={{ scale: 1.05, boxShadow: "0 0 15px #a855f7" }}
             whileTap={{ scale: 0.95 }}
             className="w-full py-3 bg-purple-600 hover:bg-purple-700 rounded-xl 
-            text-white font-semibold tracking-wide shadow-lg shadow-purple-800/50 mt-4"
+            text-white font-semibold tracking-wide shadow-lg shadow-purple-800/50 mt-4 flex justify-center"
           >
-            Sign Up
+            {loading ? (
+              <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+            ) : (
+              "Sign Up"
+            )}
           </motion.button>
+
         </div>
 
-        {/* Footer */}
         <p className="text-center text-gray-400 text-sm mt-6">
           Already have an account?{" "}
           <span className="text-purple-400 cursor-pointer hover:underline">Sign In</span>
         </p>
+
       </motion.div>
     </section>
   );
